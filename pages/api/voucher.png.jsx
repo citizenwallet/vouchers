@@ -27,8 +27,7 @@ export default async function handler(req) {
   const goodfor = searchParams.get("goodfor");
   const date = searchParams.get("date");
   const contract_address = searchParams.get("contract_address");
-
-  const qrcodeData = contract_address;
+  const qrcode_content = searchParams.get("qrcode_content");
 
   const fonts = [
     {
@@ -47,6 +46,10 @@ export default async function handler(req) {
     },
   ];
 
+  const baseUrl = process.env.VERCEL_URL
+    ? "https://" + process.env.VERCEL_URL
+    : "http://localhost:3000";
+
   return new ImageResponse(
     (
       <div
@@ -58,7 +61,7 @@ export default async function handler(req) {
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "white",
-          backgroundImage: `url("http://localhost:3000/voucher.jpg")`,
+          backgroundImage: `url("${baseUrl}/voucher.jpg")`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100%",
           backgroundPosition: "center center",
@@ -66,11 +69,9 @@ export default async function handler(req) {
         }}
       >
         <img
-          src={`${
-            process.env.VERCEL_URL
-              ? "https://" + process.env.VERCEL_URL
-              : "http://localhost:3000"
-          }/api/qrcode.png?data=${encodeURIComponent(qrcodeData)}`}
+          src={`${baseUrl}/api/qrcode.png?data=${encodeURIComponent(
+            qrcode_content
+          )}`}
           width={100}
           height={100}
           style={{

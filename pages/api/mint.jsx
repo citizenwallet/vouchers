@@ -42,13 +42,13 @@ export default async function mint(req, res) {
       "Please provide a valid contract_address (address of the NFT contract)"
     );
 
-  const imageUrl = `${
-    process.env.VERCEL_URL
-      ? "https://" + process.env.VERCEL_URL
-      : "http://localhost:3000"
-  }/api/voucher.png?contract_address=${encodeURIComponent(
+  const baseUrl = process.env.VERCEL_URL
+    ? "https://" + process.env.VERCEL_URL
+    : "http://localhost:3000";
+
+  const imageUrl = `${baseUrl}/api/voucher.png?contract_address=${encodeURIComponent(
     metadata.contract_address
-  )}&tokenid=${id}&from=${minter_name}&signature=${minter_address}&goodfor=${description}`;
+  )}&tokenid=${id}&from=${minter_name}&signature=${minter_address}&goodfor=${description}&qrcode_content=https://citizenwallet.xyz?contract_address=${contract_address}&token_id=${id}`;
 
   // we upload the NFT image
   const image_cid = await uploadToIPFS(
@@ -61,6 +61,10 @@ export default async function mint(req, res) {
 
   res.status(200).json({
     contract_address,
-    metadata: `ipfs://${image_cid}`,
+    token_id: id,
+    metadata: {
+      uri: `ipfs://${metadata_cid}`,
+      content: metadata,
+    },
   });
 }
