@@ -30,7 +30,7 @@ export default async function handler(req) {
   const tokenid = searchParams.get("tokenid");
   const signature = searchParams.get("signature");
 
-  const qrcodeData = `https://${process.env.APP_URL}/#/${contract_address}/${tokenid}`;
+  const qrcodeData = `https://${process.env.APP_URL}/#/voucher/${contract_address}/${tokenid}`;
 
   const fonts = [
     {
