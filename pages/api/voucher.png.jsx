@@ -37,21 +37,21 @@ export default async function handler(req) {
     {
       name: "typewriter",
       data: await fetchFont(
-        new URL("../../assets/typewriter.TTF", import.meta.url)
+        new URL("../../assets/typewriter.ttf", import.meta.url)
       ),
       style: "normal",
     },
     {
       name: "barlow",
       data: await fetchFont(
-        new URL("../../assets/barlow.bold.TTF", import.meta.url)
+        new URL("../../assets/barlow.bold.ttf", import.meta.url)
       ),
       style: "bold",
     },
     {
       name: "barlow",
       data: await fetchFont(
-        new URL("../../assets/barlow.extrabold.TTF", import.meta.url)
+        new URL("../../assets/barlow.extrabold.ttf", import.meta.url)
       ),
       style: "extrabold",
     },
