@@ -26,6 +26,10 @@ export async function getServerSideProps({ query }) {
 const contract_address = "";
 
 const styles = {
+  body: {
+    margin: '0',
+    padding: '0'
+  },
   page: {
     width: '210mm',
     height: '297mm',
@@ -35,9 +39,9 @@ const styles = {
     boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)'
   },
   voucher: {
-    width: '6.25inch',
+    width: '6.25in',
     height: '2.75in',
-    marginTop: '0.5cm'
+    marginBottom: '0.1cm'
   }
 }
 
@@ -75,7 +79,7 @@ export default function Page({totalPages}) {
         />
          <link rel="stylesheet" href="/styles/print.css" />
       </Head>
-      {pages.map(page => page)}
+        {pages.map(page => page)}
     </div>
   )
 }
