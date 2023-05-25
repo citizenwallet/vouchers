@@ -27,8 +27,10 @@ export default async function handler(req) {
   const goodfor = searchParams.get("goodfor");
   const date = searchParams.get("date");
   const contract_address = searchParams.get("contract_address");
+  const tokenid = searchParams.get("tokenid");
+  const signature = searchParams.get("signature");
 
-  const qrcodeData = contract_address;
+  const qrcodeData = `https://${process.env.APP_URL}/#/${contract_address}/${tokenid}`;
 
   const fonts = [
     {
@@ -115,9 +117,14 @@ export default async function handler(req) {
 
         <div
           tw=""
-          style={{ display: "none", fontFamily: "MICR E", fontSize: "2em" }}
+          style={{
+            fontSize: "1.2em",
+            position: "absolute",
+            left: 700,
+            top: 388,
+          }}
         >
-          1235509
+          {signature}
         </div>
       </div>
     ),
