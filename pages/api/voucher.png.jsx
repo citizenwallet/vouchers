@@ -31,8 +31,8 @@ export default async function handler(req) {
   const contract_chain = searchParams.get("contract_chain");
   const contract_address = searchParams.get("contract_address");
   const token_id = searchParams.get("token_id");
-  const qrcode_content = `https://app.citizenwallet.xyz/regensunite/${token_id}`;
-  console.log(">>> qrcode_content", qrcode_content);
+  const qrcode_content = `https://citizenwallet.xyz/regensunite/${token_id}`;
+
   const fonts = [
     {
       name: "typewriter",

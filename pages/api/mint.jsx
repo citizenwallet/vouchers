@@ -46,9 +46,7 @@ export default async function mint(req, res) {
     ? "https://" + process.env.VERCEL_URL
     : "http://localhost:3000";
 
-  const imageUrl = `${baseUrl}/api/voucher.png?contract_address=${encodeURIComponent(
-    metadata.contract_address
-  )}&tokenid=${id}&from=${minter_name}&signature=${minter_address}&goodfor=${description}&qrcode_content=https://citizenwallet.xyz?contract_address=${contract_address}&token_id=${id}`;
+  const imageUrl = `${baseUrl}/api/voucher.png?contract_chain=${contract_chain}&contract_address=${contract_address}&token_id=${id}&from=${minter_name}&signature=${minter_address}&goodfor=${description}&date=${metadata.minting_date}`;
 
   // we upload the NFT image
   const image_cid = await uploadToIPFS(
