@@ -7,12 +7,20 @@ const baseUrl = process.env.VERCEL_URL
 
 
 function getRandomTokenId() {
-  const offset = Math.pow(10,22); // makes sure all token ids are of the same length
-  const MAX_VALUE = Math.pow(10, 23) - offset;
+  const offset = Math.pow(10,18); // makes sure all token ids are of the same length
+  const MAX_VALUE = Math.pow(10, 19) - offset;
 
   // Generate a random number in the appropriate range.
   const randomNum = offset + Math.floor(Math.random() * MAX_VALUE);
   return randomNum;
+}
+
+export async function getServerSideProps({ query }) {
+  return {
+    props: {
+      totalPages: query.pages || 1
+    }
+  }
 }
 
 const contract_address = "";
@@ -28,15 +36,31 @@ const styles = {
   },
   voucher: {
     width: '6.25inch',
-    height: '2.75in'
+    height: '2.75in',
+    marginTop: '0.5cm'
   }
 }
 
-export default function Page() {
+export default function Page({totalPages}) {
 
   // const tokenIdBase62 = getRandomTokenId();
   // console.log(">>> getRandomTokenId base62", tokenIdBase62);
   // console.log(">>> token id", fromBase62(tokenIdBase62));
+
+  const pages = [];
+  for (let i=0;i < totalPages; i++) {
+    pages.push(
+      <div style={styles.page}>
+        <center>
+          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
+          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
+          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
+          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
+        </center>
+      </div>
+    )
+  }
+  
 
   return (
     <div>
@@ -51,14 +75,7 @@ export default function Page() {
         />
          <link rel="stylesheet" href="/styles/print.css" />
       </Head>
-      <div style={styles.page}>
-        <center>
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
-        </center>
-      </div>
+      {pages.map(page => page)}
     </div>
   )
 }

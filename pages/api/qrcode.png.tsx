@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   const data = req.query.data;
 
-  const qrlogodata = await QRLogo.generateQRWithLogo(data, `${baseUrl}/nft-logo.png`, {}, "base64");
+  const qrlogodata = await QRLogo.generateQRWithLogo(data, `${baseUrl}/nft-logo.png`, { margin: 1, width: 100, logoWidth: 25 }, "base64");
 
   res.setHeader('Content-Type', 'image/png');
   res.send(Buffer.from(qrlogodata, "base64"));
