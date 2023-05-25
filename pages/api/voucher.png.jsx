@@ -28,7 +28,7 @@ export default async function handler(req) {
   const goodfor = searchParams.get("goodfor");
   const date = searchParams.get("date");
   const signature = searchParams.get("signature");
-  const contract_chain = searchParams.get("contract_chain");
+  const contract_chain = searchParams.get("contract_chain") || "";
   const contract_address = searchParams.get("contract_address");
   const token_id = searchParams.get("token_id");
   const qrcode_content = `https://citizenwallet.xyz/regensunite/${token_id}`;
@@ -112,8 +112,8 @@ export default async function handler(req) {
     },
     inputText: {
       borderColor: "rgb(231,125,48)",
-      // marginLeft: "90px",
-      // width: "400px",
+      marginLeft: "90px",
+      width: "400px",
     },
     inputValues: {
       color: "black",
