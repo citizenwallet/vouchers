@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 const baseUrl = process.env.VERCEL_URL
   ? "https://" + process.env.VERCEL_URL
-  : "http://localhost:3000";
+  : "https://vouchers.citizenwallet.xyz";
 
 export default function Page() {
   const router = useRouter();
