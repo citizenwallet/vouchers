@@ -32,6 +32,9 @@ export default async function handler(req) {
   const contract_address = searchParams.get("contract_address");
   const token_id = searchParams.get("token_id");
   const qrcode_content = `https://vouchers.citizenwallet.xyz/regensunite/${token_id}`;
+  const tokenid = searchParams.get("tokenid");
+
+  // const qrcodeData = `https://${process.env.APP_URL}/#/vouchers/${contract_address}/${tokenid}`;
 
   const fonts = [
     {
@@ -226,6 +229,18 @@ export default async function handler(req) {
             <div style={styles.inputValues}>{signature}</div>
           </div>
         </form>
+
+        <div
+          tw=""
+          style={{
+            fontSize: "1.2em",
+            position: "absolute",
+            left: 700,
+            top: 388,
+          }}
+        >
+          {signature}
+        </div>
 
         <div style={styles.serialNumberLine}>
           <span style={styles.serialNumber}>a </span>

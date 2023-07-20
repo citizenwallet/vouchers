@@ -1,4 +1,3 @@
-import { ImageResponse } from "@vercel/og";
 import { uploadToIPFS } from "../../lib/ipfs";
 import { formatDate } from "../../lib/lib";
 
@@ -46,23 +45,29 @@ export default async function mint(req, res) {
     ? "https://" + process.env.VERCEL_URL
     : "http://localhost:3000";
 
-  const imageUrl = `${baseUrl}/api/voucher.png?contract_chain=${contract_chain}&contract_address=${contract_address}&token_id=${id}&from=${minter_name}&signature=${minter_address}&goodfor=${description}&date=${metadata.minting_date}`;
+  const imageUrl = `${
+    process.env.VERCEL_URL
+      ? "https://" + process.env.VERCEL_URL
+      : "http://localhost:3000"
+  }/api/voucher.png?contract_address=${encodeURIComponent(
+    metadata.contract_address
+  )}&tokenid=${id}&from=${minter_name}&signature=${minter_address}&goodfor=${description}&date=${
+    metadata.minting_date
+  }`;
 
   // we upload the NFT image
   const image_cid = await uploadToIPFS(
     `voucher.${contract_address}.${id}.png`,
     imageUrl
   );
-  metadata.image = `ipfs://${image_cid}`;
+  metadata.image = `${process.env.IPFS_URL}/${image_cid}`;
 
   const metadata_cid = await uploadToIPFS("metadata.json", metadata);
 
   res.status(200).json({
     contract_address,
     token_id: id,
-    metadata: {
-      uri: `ipfs://${metadata_cid}`,
-      content: metadata,
-    },
+    metadata_cid,
+    metadata,
   });
 }
