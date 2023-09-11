@@ -3,7 +3,7 @@ import { ImageResponse } from "@vercel/og";
 import { fromBase62 } from "../../lib/lib";
 
 export const config = {
-  runtime: "edge",
+  runtime: "experimental-edge",
 };
 
 const fetchFont = async (fontPath) => {

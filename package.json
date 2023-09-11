@@ -13,7 +13,7 @@
     "@vercel/og": "latest",
     "form-data": "^4.0.0",
     "isomorphic-fetch": "^3.0.0",
-    "next": "latest",
+    "next": "12.3.1",
     "qr-with-logo": "github:xdamman/qr-with-logo",
     "react": "latest",
     "react-dom": "latest",

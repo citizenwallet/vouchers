@@ -1,14 +1,20 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 
-const baseUrl = process.env.VERCEL_URL
-  ? "https://" + process.env.VERCEL_URL
-  : "https://vouchers.citizenwallet.xyz";
+const baseUrl =
+  process.env.VERCEL_ENV === "production"
+    ? "https://vouchers.citizenwallet.xyz"
+    : "https://localhost:3000";
 
-export default function Page() {
-  const router = useRouter();
-  const { community, token_id } = router.query;
+export async function getServerSideProps({ params }) {
+  return {
+    props: {
+      community: params.community,
+      token_id: params.token_id,
+    },
+  };
+}
 
+export default function Page({ community, token_id }) {
   const d = new Date();
   const date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
   return (
@@ -19,12 +25,7 @@ export default function Page() {
           name="og:description"
           content={`Voucher from the ${community} community`}
         />
-        <meta
-          name="og:image"
-          content={`${
-            process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-          }/voucher.jpg`}
-        />
+        <meta name="og:image" content={`${baseUrl}/voucher.jpg`} />
       </Head>
       <h1>{`${community} voucher`}</h1>
       <p>Work in progress</p>
@@ -34,7 +35,7 @@ export default function Page() {
         in the heart of your IKIGAI.
       </p>
       <img
-        src={`${baseUrl}/api/voucher.png?contract_chain=polygon&goodfor=&from=&date=${date}&token_id=${token_id}`}
+        src={`/api/voucher.png?contract_chain=polygon&goodfor=&from=&date=${date}&token_id=${token_id}`}
       />
       <p>
         To stay up to date with this project, follow{" "}
