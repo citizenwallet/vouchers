@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,
+h2,
+h3,
+h4,
+p {
+  @apply px-2;
+}
+
+a {
+  color: rgb(87, 167, 106);
+  color: rgb(135, 190, 145);
+}

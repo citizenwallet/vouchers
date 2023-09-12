@@ -27,7 +27,7 @@ export default function Page({ community, token_id }) {
         />
         <meta name="og:image" content={`${baseUrl}/voucher.jpg`} />
       </Head>
-      <h1>{`${community} voucher`}</h1>
+      <h1 className="text-3xl font-bold my-2">{`${community} voucher`}</h1>
       <p>Work in progress</p>
       <p>
         The goal is to let you mint your personal cheque of gratitude as an NFT
@@ -36,6 +36,7 @@ export default function Page({ community, token_id }) {
       </p>
       <img
         src={`/api/voucher.png?contract_chain=polygon&goodfor=&from=&date=${date}&token_id=${token_id}`}
+        className="w-full my-4"
       />
       <p>
         To stay up to date with this project, follow{" "}
