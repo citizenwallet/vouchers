@@ -32,14 +32,14 @@ const styles = {
     padding: '0'
   },
   page: {
-    width: '210mm',
-    height: '297mm',
+    width: '297mm',
+    height: '210mm',
     margin: '0 auto',
-    padding: '10mm'
+    padding: '5mm 10mm 5mm 10mm'
   },
   voucher: {
-    width: '6.25in',
-    height: '2.75in',
+    width: '4cm',
+    height: '10cm',
     marginBottom: '0.02cm'
   }
 }
@@ -49,23 +49,36 @@ export default function Page({totalPages, preview}) {
   // const tokenIdBase62 = getRandomTokenId();
   // console.log(">>> getRandomTokenId base62", tokenIdBase62);
   // console.log(">>> token id", fromBase62(tokenIdBase62));
-  console.log(">>> preview", preview);
+  const cols = [];
+  const rows = [];
+  const pages = [];
+
+
   if (preview) {
     styles.page.boxShadow = '0 0 5px rgba(0, 0, 0, 0.1)';
     styles.page.backgroundColor = '#fff';
     styles.body.backgroundColor = '#ccc';
     styles.page.margin = '10px auto';
   }
+  
 
-  const pages = [];
+  for (let i=0;i < 7; i++) {
+    cols.push(<img style={styles.voucher} src={`${baseUrl}/api/token.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />);
+  }
+
+  for (let i=0;i < 2; i++) {
+    rows.push(
+      <div className="row1 flex flex-row">
+        { cols.map(col => col) }
+      </div>
+    );
+  }
+
   for (let i=0;i < totalPages; i++) {
     pages.push(
       <div style={styles.page}>
         <center>
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
-          <img style={styles.voucher} src={`${baseUrl}/api/voucher.png?contract_chain=polygon&contract_address=${contract_address}&token_id=${getRandomTokenId()}`} />
+          { rows.map(row => row) }
         </center>
       </div>
     )
