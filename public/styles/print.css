@@ -1,19 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body.preview {
+  padding: 10px;
+  background-color: #ccc;
+}
+
+.page.portrait {
+  width: 210mm;
+  height: 297mm;
+}
+
+.page.landscape {
+  width: 297mm;
+  height: 210mm;
+}
+
+body.preview .page {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 10px auto !important;
+  padding: 10px;
+}
+
 @media print {
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
   .page {
-    width: 210mm;
-    height: 297mm;
     margin: 0 auto;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-
-  .voucher {
-    width: 6.25in;
-    height: 2.75in;
+    page-break-before: always;
   }
 }

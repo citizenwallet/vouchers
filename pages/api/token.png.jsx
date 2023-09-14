@@ -11,62 +11,20 @@ const fetchFont = async (fontPath) => {
     console.error("Invalid fontPath", fontPath);
     return;
   } else {
-    console.log("fontPath.href is set", fontPath.href);
+    // console.log("fontPath.href is set", fontPath.href);
   }
   try {
     const res = await fetch(fontPath);
     return await res.arrayBuffer();
   } catch (e) {
-    console.log("fetch error:", e);
+    console.error("fetch error:", e);
   }
 };
 
 export default async function handler(req) {
   const { searchParams } = new URL(req.url);
 
-  const from = searchParams.get("from");
-  const goodfor = searchParams.get("goodfor");
-  const date = searchParams.get("date");
-  const signature = searchParams.get("signature");
-  const contract_chain = searchParams.get("contract_chain") || "";
-  const contract_address = searchParams.get("contract_address");
-  const token_id = searchParams.get("token_id");
-  // const qrcode_content = `https://vouchers.citizenwallet.xyz/regensunite/${token_id}`;
-  const qrcode_content = `https://app.citizenwallet.xyz/#/?voucher=H4sIAAho_2QA_0WP2WoDMQxF_8XPM-BFtuX8jVYamrRhJoSW0n-vpwv1g4yFdH3OR5Dt_XZ_DaePIOfbk23hFMj2NWVc5b6F5bd9o42u-zF2fswRbo1ZS5IcPSM1YNSh7sMYhUnD59_i3d7uc6FlNGvaBLoNEBtVoRSqnG0eJ2XxFlPs1GXGRGmNAIHLGIoJ-gR5Vp9B-zfwz_MfSp8v9hJOJS9hXrNOD1zCLZzSEna6fCPojCtWuSjUkWoGdMbRjGyyA1ga80tyTqmag7kSKYKOgbEnSofTlWQmiSY18lGqZHRtHgeOmtRncC6tE3YWIJmqZYoyojHHQiw8NCocSWc9kBKwa8lr7CYruNBKXfNaE5ZSPWseh_nDtv38evh9fgH9qudzsQEAAA==&params=H4sIAAho_2QA_wXBQQ5AMBAAwK_05Chb2tUeemH5gHDf0IYEbYrE883wsfPtOKViyZ6fmB18CrBvbaNrZc1gKoJgV5CaJGJoaIDVaGBELC4-vZvju2w-ixCzgFKKaaTuB3fA83pWAAAA${token_id}`;
-  const tokenid = searchParams.get("tokenid");
-
-  // const qrcodeData = `https://${process.env.APP_URL}/#/vouchers/${contract_address}/${tokenid}`;
-
-  const fonts = [
-    {
-      name: "typewriter",
-      data: await fetchFont(
-        new URL("../../assets/typewriter.ttf", import.meta.url)
-      ),
-      style: "normal",
-    },
-    {
-      name: "barlow",
-      data: await fetchFont(
-        new URL("../../assets/barlow.bold.ttf", import.meta.url)
-      ),
-      style: "bold",
-    },
-    {
-      name: "barlow",
-      data: await fetchFont(
-        new URL("../../assets/barlow.extrabold.ttf", import.meta.url)
-      ),
-      style: "extrabold",
-    },
-    {
-      name: "MICR E",
-      data: await fetchFont(
-        new URL("../../assets/micrenc.ttf", import.meta.url)
-      ),
-      style: "normal",
-    },
-  ];
+  const data = searchParams.get("data");
 
   const baseUrl = process.env.VERCEL_URL
     ? "https://" + process.env.VERCEL_URL
@@ -105,9 +63,7 @@ export default async function handler(req) {
         />
 
         <img
-          src={`${baseUrl}/api/qrcode.png?data=${encodeURIComponent(
-            qrcode_content
-          )}`}
+          src={`${baseUrl}/api/qrcode.png?data=${encodeURIComponent(data)}`}
           width={240}
           height={240}
           style={{
@@ -121,7 +77,6 @@ export default async function handler(req) {
     {
       width: 330,
       height: 825,
-      fonts,
     }
   );
 }

@@ -11,13 +11,13 @@ const fetchFont = async (fontPath) => {
     console.error("Invalid fontPath", fontPath);
     return;
   } else {
-    console.log("fontPath.href is set", fontPath.href);
+    // console.log("fontPath.href is set", fontPath.href);
   }
   try {
     const res = await fetch(fontPath);
     return await res.arrayBuffer();
   } catch (e) {
-    console.log("fetch error:", e);
+    console.error("fetch error:", e);
   }
 };
 

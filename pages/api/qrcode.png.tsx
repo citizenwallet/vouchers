@@ -6,7 +6,7 @@ const baseUrl = process.env.VERCEL_URL
 
 export default async function handler(req, res) {
 
-  console.log(req.query);
+  // console.log(req.query);
 
   const data = req.query.data;
 

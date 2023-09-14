@@ -11,13 +11,19 @@
   },
   "dependencies": {
     "@vercel/og": "latest",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.7.1",
     "form-data": "^4.0.0",
     "isomorphic-fetch": "^3.0.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "next": "12.3.1",
     "qr-with-logo": "github:xdamman/qr-with-logo",
     "react": "latest",
     "react-dom": "latest",
-    "sharp": "^0.32.1"
+    "sharp": "^0.32.1",
+    "web3": "^4.1.1",
+    "web3modal": "^1.9.12"
   },
   "devDependencies": {
     "@types/node": "^18.15.5",

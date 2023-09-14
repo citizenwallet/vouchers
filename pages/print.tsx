@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { fromBase62, toBase62 } from "../lib/lib";
+import React, { useEffect } from "react";
 
 const baseUrl = process.env.VERCEL_URL
     ? "https://" + process.env.VERCEL_URL
@@ -19,7 +19,7 @@ export async function getServerSideProps({ query }) {
   return {
     props: {
       totalPages: query.pages || 1,
-      preview: query.preview || false
+      preview: query.preview === '1' || false
     }
   }
 }
@@ -40,22 +40,22 @@ const styles = {
   voucher: {
     width: '6.25in',
     height: '2.75in',
-    marginBottom: '0.02cm'
+    marginBottom: '0.015cm'
   }
 }
 
 export default function Page({totalPages, preview}) {
 
-  // const tokenIdBase62 = getRandomTokenId();
-  // console.log(">>> getRandomTokenId base62", tokenIdBase62);
-  // console.log(">>> token id", fromBase62(tokenIdBase62));
-  console.log(">>> preview", preview);
-  if (preview) {
-    styles.page.boxShadow = '0 0 5px rgba(0, 0, 0, 0.1)';
-    styles.page.backgroundColor = '#fff';
-    styles.body.backgroundColor = '#ccc';
-    styles.page.margin = '10px auto';
-  }
+  useEffect(() => {
+    if (preview) {
+      document.body.classList.add("preview");
+    }
+
+    // Cleanup function to remove the styles when the component is unmounted
+    return () => {
+      document.body.classList.remove("preview");
+    };
+  }, [preview]);
 
   const pages = [];
   for (let i=0;i < totalPages; i++) {
