@@ -17,7 +17,7 @@ export async function getServerSideProps({ params }) {
   } catch (e) {
     console.log("verifyMessage error:", e);
   }
-  const valid = signer === process.env.PUBLIC_KEY;
+  const valid = signer === process.env.SIGNER_ADDRESS;
   return {
     props: {
       signer,
