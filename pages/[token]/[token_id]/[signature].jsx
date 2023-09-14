@@ -31,9 +31,8 @@ export async function getServerSideProps({ params }) {
 
 const styles = {
   voucher: {
-    width: "4cm",
-    height: "10cm",
-    marginBottom: "0.015cm",
+    height: "90vh",
+    margin: "10px auto",
   },
 };
 
@@ -95,7 +94,7 @@ export default function Page({ token, token_id, signer, signature, valid }) {
           valid ? "bg-green-700" : "bg-red-700"
         }`}
       >
-        <h1 className="text-3xl font-bold my-2">{`${token} token`}</h1>
+        {/* <h1 className="text-3xl font-bold my-2">{`${token} token`}</h1> */}
         <img
           className="mx-auto"
           key={tokenUrl}
@@ -104,8 +103,8 @@ export default function Page({ token, token_id, signer, signature, valid }) {
         />
         {valid && (
           <div className="text-center my-3">
-            This token can be redeemed for <strong>1</strong> {token}
-            between {formatDate(validFrom)} and {formatDate(validTill)}.
+            This token can be redeemed for <strong>1</strong> {token} between{" "}
+            {formatDate(validFrom)} and {formatDate(validTill)}.
           </div>
         )}
         {!valid && (
