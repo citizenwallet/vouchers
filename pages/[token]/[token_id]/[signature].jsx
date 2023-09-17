@@ -31,7 +31,7 @@ export async function getServerSideProps({ params }) {
 
 const styles = {
   voucher: {
-    height: "90vh",
+    height: "80vh",
     margin: "10px auto",
   },
 };
@@ -103,8 +103,18 @@ export default function Page({ token, token_id, signer, signature, valid }) {
         />
         {valid && (
           <div className="text-center my-3">
-            This token can be redeemed for <strong>1</strong> {token} between{" "}
-            {formatDate(validFrom)} and {formatDate(validTill)}.
+            <p>
+              This token can be redeemed for <strong>1</strong> {token} between{" "}
+              {formatDate(validFrom)} and {formatDate(validTill)}.
+            </p>
+            <p>
+              To redeem, bring that ticket back to{" "}
+              <a href="https://maps.app.goo.gl/J5oBMuaQuA6grLMQA">Moos</a> (for
+              Jacob) or send an email to{" "}
+              <a href="mailto:rgn@regensunite.earth">rgn@regensunite.earth</a>{" "}
+              with a picture of the paper tokens you'd like to redeem and your{" "}
+              <a href="https://wallet.regensunite.earth">wallet address</a>.
+            </p>
           </div>
         )}
         {!valid && (

@@ -1,4 +1,7 @@
 import Head from 'next/head'
+
+
+
 import tokens from "../../tokens.json";
 import React, { useEffect } from "react";
 
@@ -9,8 +12,9 @@ const baseUrl =
     ? productionUrl
     : "http://localhost:3000";
 
-const tokensPerPage = 14;
-const tokensPerRow = 7;
+const tokensPerPage = 30;
+const tokensPerRow = 10;
+const rows = [0, 1, 2];
 
 export async function getServerSideProps({ params, query }) {
   const totalPages = Math.min(query.pages || 1, Math.ceil(tokens.length / tokensPerPage)) || 1;
@@ -33,7 +37,7 @@ const styles = {
     width: '297mm',
     // height: '210mm',
     margin: '0 auto',
-    padding: '4mm 6mm',
+    padding: '3mm 6mm',
     overflow: 'hidden',
   },
   row: {
@@ -41,9 +45,10 @@ const styles = {
     overflow: 'hidden',
   },
   voucher: {
-    width: '4cm',
-    height: '10cm',
-    marginBottom: '0.015cm'
+    width: '2.7cm',
+    // height: '10cm',
+    marginRight: '0.025cm',
+    marginBottom: '0.02cm'
   }
 }
 
@@ -81,7 +86,6 @@ export default function Page({totalPages, preview}) {
     };
   }, [preview]);
 
-  const rows = [0, 1];
   for (let i=0;i < totalPages; i++) {
     const key = `page${i}`;
     pages.push(
